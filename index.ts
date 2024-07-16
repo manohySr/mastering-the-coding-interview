@@ -1,21 +1,47 @@
 /*
-  There is static array and dynamic array
-  In other language like C++ or Java, you have access static array and more
-  access to memory usage
-
-  But in JS or higher language like python, you don't need to worry about that,
-  it's  dynamic
-  so sometime the 0(1) is O(n) in push method per example
+Creating my own array DS
 */
 
-const strings: string[] = ["a", "b", "c"];
+class MyArray<T> {
+  dataLength: number;
+  data: { [index: number]: T };
 
-strings.push("d"); // O(1)
+  constructor() {
+    this.dataLength = 0;
+    this.data = {};
+  }
 
-strings.pop(); // O(1)
+  get length() {
+    return this.dataLength;
+  }
 
-strings.unshift("x"); // O(n)
+  getItem(index: number): T {
+    if (this.data[index]) {
+      return this.data[index];
+    }
+    throw new Error("Index out of bounds");
+  }
 
-strings.splice(2, 0, "string added"); // O(n/2) => O(n)
+  push(item: T) {
+    this.data[this.dataLength] = item;
+    this.dataLength++;
+    return this.dataLength;
+  }
 
-console.log(strings);
+  pop(): T | undefined {
+    if (this.dataLength > 0) {
+      const deletedItem = this.data[this.dataLength];
+      this.dataLength--;
+      delete this.data[this.dataLength];
+      return deletedItem;
+    }
+    return undefined;
+  }
+}
+
+// const arr1 = new MyArray<string>();
+// arr1.push("Manohy");
+// arr1.push("Manohy2");
+// console.log(arr1.getItem(2));
+// console.log(arr1);
+
