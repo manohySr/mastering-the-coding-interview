@@ -15,5 +15,8 @@ Hash tables
 
     insert O(1) - lookup O(1) - delete O(1) - search O(1)
 
-    cons: when we have a collision the performance can be O(n) when lookup
+    cons: when we have a collision(data inserted randomly can make collision) 
+    the performance can be O(n) when lookup
+
+    Map and Set are hash tables DS in typescript/javascript
 */
