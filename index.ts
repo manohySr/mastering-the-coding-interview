@@ -20,3 +20,42 @@ Hash tables
 
     Map and Set are hash tables DS in typescript/javascript
 */
+
+// Implementation of my own Hash Tables DS
+type Data = Array<any>;
+type Key = String;
+type Value = any;
+
+class HashTable {
+  data: Data;
+  constructor(size: Number) {
+    this.data = new Array(size);
+  }
+
+  private hash(key: Key) {
+    let hash = 0;
+    for (let i = 0; i < key.length; i++) {
+      hash = (hash + key.charCodeAt(i) * i) % this.data.length;
+    }
+    return hash;
+  }
+
+  public set(key: Key, value: Value) {
+    const address = this.hash(key);
+    if (!this.data[address]) {
+      this.data[address] = value;
+    }
+  }
+
+  public get(key: Key) {
+    const address = this.hash(key);
+    if (this.data[address]) {
+      return this.data[address];
+    }
+    return undefined;
+  }
+}
+
+const myHashTable = new HashTable(50);
+myHashTable.set("zaza", "Zaina");
+console.log(myHashTable.get("zaza"));
