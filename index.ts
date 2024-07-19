@@ -23,16 +23,16 @@ Hash tables
 
 // Implementation of my own Hash Tables DS
 type Data = Array<any>;
-type Key = String;
+type Key = string;
 type Value = any;
 
 class HashTable {
   data: Data;
-  constructor(size: Number) {
+  constructor(size: number) {
     this.data = new Array(size);
   }
 
-  private hash(key: Key) {
+  private hash(key: Key): number {
     let hash = 0;
     for (let i = 0; i < key.length; i++) {
       hash = (hash + key.charCodeAt(i) * i) % this.data.length;
@@ -40,14 +40,14 @@ class HashTable {
     return hash;
   }
 
-  public set(key: Key, value: Value) {
+  public set(key: Key, value: Value): void {
     const address = this.hash(key);
     if (!this.data[address]) {
       this.data[address] = value;
     }
   }
 
-  public get(key: Key) {
+  public get(key: Key): Value | undefined {
     const address = this.hash(key);
     if (this.data[address]) {
       return this.data[address];
@@ -57,5 +57,5 @@ class HashTable {
 }
 
 const myHashTable = new HashTable(50);
-myHashTable.set("zaza", "Zaina");
+myHashTable.set("zaza", "Manohy");
 console.log(myHashTable.get("zaza"));
