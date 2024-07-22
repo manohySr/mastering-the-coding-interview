@@ -85,3 +85,14 @@ myHashTable.set("zaza", "Manohy");
 myHashTable.set("yoyo", "Mama");
 myHashTable.set("wawa", "Dada");
 console.log(myHashTable.keys());
+
+/*
+ * Difference btw Arrays and Hash Tables
+
+| **Operation**              | **Array**         | **Hash Table**           |
+|----------------------------|-------------------|--------------------------|
+| **Access**                 | O(1)              | O(1) average, O(n) worst |
+| **Search**                 | O(n)              | O(1) average, O(n) worst |
+| **Insertion**              | O(n)              | O(1) average, O(n) worst |
+| **Deletion**               | O(n)              | O(1) average, O(n) worst |
+ */
