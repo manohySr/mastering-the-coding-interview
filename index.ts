@@ -105,15 +105,16 @@ Hash tables
  */
 
 function recurringNumber(arr: Array<number>): number | undefined {
-  const map:  = {};
+  const map: { [key: number]: boolean } = {};
   for (let item of arr) {
     if (map[item]) {
-      return map[item]
+      return item;
     } else {
-      map[item] = true
+      map[item] = true;
     }
   }
   return undefined;
 }
 
-recurringNumber([2, 5, 1, 2, 3, 5, 1, 2, 4]);
+console.log(recurringNumber([2, 5, 1, 2, 3, 5, 1, 2, 4]));
+console.log(recurringNumber([2, 1, 5, 8, 9, 5]));
