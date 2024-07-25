@@ -72,10 +72,22 @@ class LinkedList {
     }
     return this;
   }
+
+  prepend(value: Data): LinkedList {
+    const newNode: Noeud = {
+      value,
+      next: null,
+    };
+    newNode.next = this.head;
+    this.head = newNode;
+    this.length++;
+    return this;
+  }
 }
 
 let link = new LinkedList(5);
 link.append(10);
 link.append(15);
+link.prepend(1);
 
 console.log(link);
