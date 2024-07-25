@@ -47,9 +47,10 @@ type Noeud = {
 type Data = any;
 
 class LinkedList {
-  private head: Noeud;
-  private tail: Noeud;
+  private head: Noeud | null;
+  private tail: Noeud | null;
   private length: number;
+
   constructor(value: Data) {
     this.head = {
       value: value,
@@ -60,13 +61,15 @@ class LinkedList {
   }
 
   append(value: Data): LinkedList {
-    const newNode = {
+    const newNode: Noeud = {
       value,
       next: null,
     };
-    this.tail.next = newNode;
-    this.tail = newNode;
-    this.length++;
+    if (this.tail) {
+      this.tail.next = newNode;
+      this.tail = newNode;
+      this.length++;
+    }
     return this;
   }
 }
@@ -74,4 +77,5 @@ class LinkedList {
 let link = new LinkedList(5);
 link.append(10);
 link.append(15);
+
 console.log(link);
