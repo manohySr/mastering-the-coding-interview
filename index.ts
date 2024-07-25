@@ -20,3 +20,58 @@
  * The first node is called head
  * The last node is called tail
  */
+
+// my linked list
+/**
+ * my DS should look something like:
+ * 16 -> 10 -> 5
+ *  LinkedList = {
+ *     head: {
+ *          value: 16,
+ *           next: {
+ *              value: 10,
+ *              next: {
+ *                  value: 5,
+ *                  next: null
+ *              }
+ *          }
+ *      }
+ *  }
+ */
+
+type Noeud = {
+  value: Data;
+  next: Noeud | null;
+};
+
+type Data = any;
+
+class LinkedList {
+  private head: Noeud;
+  private tail: Noeud;
+  private length: number;
+  constructor(value: Data) {
+    this.head = {
+      value: value,
+      next: null,
+    };
+    this.tail = this.head;
+    this.length = 1;
+  }
+
+  append(value: Data): LinkedList {
+    const newNode = {
+      value,
+      next: null,
+    };
+    this.tail.next = newNode;
+    this.tail = newNode;
+    this.length++;
+    return this;
+  }
+}
+
+let link = new LinkedList(5);
+link.append(10);
+link.append(15);
+console.log(link);
