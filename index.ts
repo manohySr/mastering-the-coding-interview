@@ -41,7 +41,7 @@
 
 type Noeud = {
   value: Data;
-  next: Noeud | null;
+  next: Noeud | null | any;
 };
 
 type Data = any;
@@ -83,11 +83,59 @@ class LinkedList {
     this.length++;
     return this;
   }
+
+  printList(): void {
+    const data: Array<Data> = [];
+    let currentNode: Noeud | null = this.head;
+
+    while (currentNode !== null) {
+      data.push(currentNode.value);
+      currentNode = currentNode.next;
+    }
+
+    console.log(data);
+  }
+
+  insert(index: number, value: Data): LinkedList {
+    let counterIndex = 1;
+    let currentNode: Noeud | null = this.head;
+    let newNode: Noeud | null = {
+      value,
+      next: null,
+    };
+
+    if (index === 0) {
+      this.prepend(value);
+      this.length++;
+      return this;
+    }
+
+    if (index >= this.length) {
+      this.append(value);
+      this.length++;
+      return this;
+    }
+
+    while (currentNode !== null) {
+      if (counterIndex === index) {
+        console.log(currentNode);
+        const holdingData = currentNode.next;
+        newNode.next = holdingData;
+        currentNode.next = newNode;
+        this.length++;
+        break;
+      }
+      currentNode = currentNode.next;
+      counterIndex++;
+    }
+    return this;
+  }
 }
 
 let link = new LinkedList(5);
 link.append(10);
 link.append(15);
 link.prepend(1);
-
-console.log(link);
+link.printList();
+link.insert(2, 80);
+link.printList();
