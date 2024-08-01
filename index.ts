@@ -97,38 +97,58 @@ class LinkedList {
   }
 
   insert(index: number, value: Data): LinkedList {
-    let counterIndex = 1;
-    let currentNode: Noeud | null = this.head;
-    let newNode: Noeud | null = {
-      value,
-      next: null,
-    };
-
     if (index === 0) {
       this.prepend(value);
-      this.length++;
       return this;
     }
 
     if (index >= this.length) {
       this.append(value);
-      this.length++;
       return this;
     }
 
-    while (currentNode !== null) {
-      if (counterIndex === index) {
-        console.log(currentNode);
-        const holdingData = currentNode.next;
-        newNode.next = holdingData;
-        currentNode.next = newNode;
-        this.length++;
-        break;
-      }
+    const newNode: Noeud = {
+      value,
+      next: null,
+    };
+
+    const leader = this.traverseToIndex(index - 1);
+
+    if (leader) {
+      const holdingData = leader.next;
+      newNode.next = holdingData;
+      leader.next = newNode;
+      this.length++;
+    }
+
+    return this;
+  }
+
+  traverseToIndex(index: number): Noeud | null {
+    let counterIndex = 0;
+    let currentNode: Noeud | null = this.head;
+
+    while (currentNode !== null && counterIndex < index) {
       currentNode = currentNode.next;
       counterIndex++;
     }
-    return this;
+
+    return currentNode;
+  }
+
+  remove(index: number): void {
+    if (index === 0 && this.head) {
+      this.head = this.head.next;
+      this.length--;
+      return;
+    }
+
+    const leader = this.traverseToIndex(index - 1);
+    if (leader) {
+      const unwantedHeadData = leader.next;
+      leader.next = unwantedHeadData.next;
+      this.length--;
+    }
   }
 }
 
@@ -138,4 +158,6 @@ link.append(15);
 link.prepend(1);
 link.printList();
 link.insert(2, 80);
+link.printList();
+link.remove(0);
 link.printList();
