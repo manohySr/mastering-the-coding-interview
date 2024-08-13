@@ -84,6 +84,9 @@ class DoublyLinkedList {
       prev: null,
     };
     newNode.next = this.head;
+    if (this.head) {
+      this.head.prev = newNode;
+    }
     this.head = newNode;
     this.length++;
     return this;
@@ -159,11 +162,9 @@ class DoublyLinkedList {
 }
 
 let link = new DoublyLinkedList(5);
-link.append(10);
-link.append(15);
+link.prepend(1);
 console.log(link);
-// link.prepend(1);
-// link.printList();
+link.printList();
 // link.insert(2, 80);
 // link.printList();
 // link.remove(0);
