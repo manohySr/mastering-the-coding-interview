@@ -124,9 +124,11 @@ class DoublyLinkedList {
     const leader = this.traverseToIndex(index - 1);
 
     if (leader) {
-      const holdingData = leader.next;
-      newNode.next = holdingData;
+      const follower = leader.next;
+      newNode.next = follower;
       leader.next = newNode;
+      newNode.prev = leader;
+      follower.prev = newNode;
       this.length++;
     }
 
@@ -163,9 +165,10 @@ class DoublyLinkedList {
 
 let link = new DoublyLinkedList(5);
 link.prepend(1);
+link.append(3);
+link.insert(1, 80);
 console.log(link);
 link.printList();
-// link.insert(2, 80);
 // link.printList();
 // link.remove(0);
 // link.printList();
