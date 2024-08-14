@@ -150,14 +150,39 @@ class LinkedList {
       this.length--;
     }
   }
+
+  reverse(): LinkedList {
+    if (!this.head?.next) {
+      return this;
+    }
+
+    let prevNode: Noeud | null = null;
+    let currentNode: Noeud | null = this.head;
+    let nextNode: Noeud | null = null;
+
+    this.tail = this.head;
+
+    while (currentNode !== null) {
+      nextNode = currentNode.next;
+      currentNode.next = prevNode;
+      prevNode = currentNode;
+      currentNode = nextNode;
+    }
+
+    this.head = prevNode;
+
+    return this;
+  }
 }
 
-// let link = new LinkedList(5);
-// link.append(10);
-// link.append(15);
-// link.prepend(1);
+let link = new LinkedList(5);
+link.append(10);
+link.append(15);
+link.prepend(1);
 // link.printList();
-// link.insert(2, 80);
+link.insert(2, 80);
 // link.printList();
 // link.remove(0);
-// link.printList();
+link.printList();
+link.reverse();
+link.printList();
