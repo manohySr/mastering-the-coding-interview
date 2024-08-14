@@ -42,12 +42,11 @@
 type Noeud = {
   value: Data;
   next: Noeud | null | any;
-  prev: Noeud | null | any;
 };
 
 type Data = any;
 
-class DoublyLinkedList {
+class LinkedList {
   private head: Noeud | null;
   private tail: Noeud | null;
   private length: number;
@@ -56,20 +55,17 @@ class DoublyLinkedList {
     this.head = {
       value: value,
       next: null,
-      prev: null,
     };
     this.tail = this.head;
     this.length = 1;
   }
 
-  append(value: Data): DoublyLinkedList {
+  append(value: Data): LinkedList {
     const newNode: Noeud = {
-      value: value,
+      value,
       next: null,
-      prev: null,
     };
     if (this.tail) {
-      newNode.prev = this.tail;
       this.tail.next = newNode;
       this.tail = newNode;
       this.length++;
@@ -77,16 +73,12 @@ class DoublyLinkedList {
     return this;
   }
 
-  prepend(value: Data): DoublyLinkedList {
+  prepend(value: Data): LinkedList {
     const newNode: Noeud = {
-      value: value,
+      value,
       next: null,
-      prev: null,
     };
     newNode.next = this.head;
-    if (this.head) {
-      this.head.prev = newNode;
-    }
     this.head = newNode;
     this.length++;
     return this;
@@ -104,7 +96,7 @@ class DoublyLinkedList {
     console.log(data);
   }
 
-  insert(index: number, value: Data): DoublyLinkedList {
+  insert(index: number, value: Data): LinkedList {
     if (index === 0) {
       this.prepend(value);
       return this;
@@ -116,19 +108,16 @@ class DoublyLinkedList {
     }
 
     const newNode: Noeud = {
-      value: value,
+      value,
       next: null,
-      prev: null,
     };
 
     const leader = this.traverseToIndex(index - 1);
 
     if (leader) {
-      const follower = leader.next;
-      newNode.next = follower;
+      const holdingData = leader.next;
+      newNode.next = holdingData;
       leader.next = newNode;
-      newNode.prev = leader;
-      follower.prev = newNode;
       this.length++;
     }
 
@@ -163,19 +152,12 @@ class DoublyLinkedList {
   }
 }
 
-let link = new DoublyLinkedList(5);
-link.prepend(1);
-link.append(3);
-link.insert(1, 80);
-console.log(link);
-link.printList();
+// let link = new LinkedList(5);
+// link.append(10);
+// link.append(15);
+// link.prepend(1);
+// link.printList();
+// link.insert(2, 80);
 // link.printList();
 // link.remove(0);
 // link.printList();
-
-/**
- * Doubly Linked Lists
- * More optimum than linked lists
- * The first node will point to the next and the next will point to the previous
- * I can start to read backward
- */
