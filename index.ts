@@ -10,6 +10,13 @@
  *  lookup O(log N)
  *  insert O(log N)
  *  delete O(log N)
+ * 
+ * There is Balanced and Unbalanced BST
+ * 
+ * Unbalanced BST can: have O(n) for all action 
+ * 
+ * Pros: Better than O(n) - Order - Flexible Size
+ * Cons: No O(1) operations
  */
 
 class BinaryTree {
