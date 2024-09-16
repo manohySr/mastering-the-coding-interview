@@ -5,8 +5,8 @@ yarn.lock
 
 # TypeScript build output
 dist/
-*.js
-*.js.map
+# *.js
+# *.js.map
 
 # IDE/Editor specific files
 .vscode/
